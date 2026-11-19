@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 6</title>
+</head>
+<body>
+  <!-- QUESTION 1 -->
+  <h2>1. Positive, Negative, or Zero</h2>
+  <p id="result1"></p>
+  <hr>
+
+  <!-- QUESTION 2 -->
+  <h2>2. Examination Pass / Fail</h2>
+  <p id="result2"></p>
+  <hr>
+
+  <!-- QUESTION 3 -->
+  <h2>3. Examination Grade</h2>
+  <p id="result3"></p>
+  <hr>
+
+  <!-- QUESTION 4 -->
+  <h2>4. Bookstore Discount Calculator</h2>
+  <p id="result4"></p>
+  <hr>
+
+  <!-- QUESTION 5 -->
+  <h2>5. Student Grade Checker</h2>
+  <h1>Student Grade Checker</h1>
+
+  <div>
+    <label for="studentName">Student Name:</label>
+    <input type="text" id="studentName" placeholder="Enter student name">
+  </div>
+  <br>
+  <div>
+    <label for="studentMark">Examination Mark:</label>
+    <input type="number" id="studentMark" placeholder="0 - 100">
+  </div>
+  <br>
+  <button type="button" onclick="checkGrade()">Check Grade</button>
+
+  <p id="output5"></p>
+
+  <script>
+    // --- Question 1 ---
+    let number = -8;
+    let msg1 = "";
+
+    if (number > 0) {
+      msg1 = `${number} is a positive number.`;
+    } else if (number < 0) {
+      msg1 = `${number} is a negative number.`;
+    } else {
+      msg1 = "The number is zero.";
+    }
+    document.getElementById("result1").innerHTML = msg1;
+
+    // --- Question 2 ---
+    let mark = 75;
+    let status2 = "";
+
+    if (mark >= 50) {
+      status2 = "PASS";
+    } else {
+      status2 = "FAIL";
+    }
+    document.getElementById("result2").innerHTML = `Mark: ${mark} — Result: <strong>${status2}</strong>`;
+
+    // --- Question 3 ---
+    mark = 85;
+    let grade3 = "";
+
+    if (mark >= 80 && mark <= 100) {
+      grade3 = "A";
+    } else if (mark >= 70) {
+      grade3 = "B";
+    } else if (mark >= 60) {
+      grade3 = "C";
+    } else if (mark >= 50) {
+      grade3 = "D";
+    } else {
+      grade3 = "F";
+    }
+    document.getElementById("result3").innerHTML = `Mark: ${mark} — Grade: <strong>${grade3}</strong>`;
+
+    // --- Question 4 ---
+    let purchase = 250;
+    let discountRate = 0;
+    let discountLabel = "";
+
+    if (purchase >= 200) {
+      discountRate = 0.20;
+      discountLabel = "20%";
+    } else if (purchase >= 100) {
+      discountRate = 0.10;
+      discountLabel = "10%";
+    } else {
+      discountRate = 0;
+      discountLabel = "No discount";
+    }
+
+    let discountAmount = purchase * discountRate;
+    let finalPayment = purchase - discountAmount;
+
+    document.getElementById("result4").innerHTML = `
+      Purchase Amount: RM${purchase.toFixed(2)}<br>
+      Discount Applied: <strong>${discountLabel}</strong> (RM${discountAmount.toFixed(2)})<br>
+      Final Payment: <strong>RM${finalPayment.toFixed(2)}</strong>
+    `;
+
+    // --- Question 5 ---
+    function checkGrade() {
+      const name = document.getElementById("studentName").value.trim();
+      const markInput = document.getElementById("studentMark").value;
+      const output = document.getElementById("output5");
+
+      if (name === "") {
+        output.innerHTML = "Please enter the student's name.";
+        return;
+      }
+
+      if (markInput === "") {
+        output.innerHTML = "Please enter an examination mark.";
+        return;
+      }
+
+      const studentScore = Number(markInput);
+
+      if (studentScore < 0 || studentScore > 100 || Number.isNaN(studentScore)) {
+        output.innerHTML = "Invalid mark! Please enter a mark between 0 and 100.";
+        return;
+      }
+
+      let grade5 = "";
+
+      if (studentScore >= 80) {
+        grade5 = "A";
+      } else if (studentScore >= 70) {
+        grade5 = "B";
+      } else if (studentScore >= 60) {
+        grade5 = "C";
+      } else if (studentScore >= 50) {
+        grade5 = "D";
+      } else {
+        grade5 = "F";
+      }
+
+      output.innerHTML = `
+        <strong>Student Name:</strong> ${name}<br>
+        <strong>Examination Mark:</strong> ${studentScore}<br>
+        <strong>Grade:</strong> ${grade5}
+      `;
+    }
+  </script>
+
+</body>
+</html>
